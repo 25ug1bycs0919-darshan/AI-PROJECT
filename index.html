@@ -1,0 +1,556 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Build what matters at Northfield College's student hackathon, January 16–17. Explore domains, prizes, and register your team."
+    />
+    <meta name="theme-color" content="#f5f4ed" />
+    <title>Makeathon 2027 — Northfield College</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        color-scheme: light;
+        font-family: "DM Sans", sans-serif;
+        color: #17231d;
+        background: #f5f4ed;
+        font-synthesis: none;
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+        --ink: #17231d;
+        --green: #b7f36b;
+        --muted: #72786f;
+        --paper: #f5f4ed;
+        --line: #dedfd4;
+        --mono: "DM Mono", monospace;
+        --display: "Space Grotesk", sans-serif;
+      }
+
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; scroll-padding-top: 85px; }
+      body { min-width: 320px; margin: 0; }
+      a { color: inherit; text-decoration: none; }
+      button, input, select { font: inherit; }
+      button, a { -webkit-tap-highlight-color: transparent; }
+      button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible {
+        outline: 3px solid #85bf45;
+        outline-offset: 3px;
+      }
+      .shell { width: min(1160px, calc(100% - 64px)); margin-inline: auto; }
+      .mono { font-family: var(--mono); }
+
+      .topbar {
+        position: sticky;
+        z-index: 10;
+        top: 0;
+        border-bottom: 1px solid rgb(23 35 29 / 10%);
+        background: rgb(245 244 237 / 94%);
+        backdrop-filter: blur(14px);
+      }
+      .nav {
+        display: flex;
+        min-height: 76px;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+      }
+      .wordmark { display: inline-flex; align-items: center; gap: 11px; }
+      .mark {
+        display: grid;
+        width: 35px;
+        height: 35px;
+        place-items: center;
+        border-radius: 50%;
+        background: var(--ink);
+        color: var(--green);
+        font: 700 17px var(--display);
+      }
+      .wordmark-text { font: 700 15px var(--display); letter-spacing: -.04em; }
+      .wordmark-text span { color: #85887d; font-weight: 500; }
+      .nav-links { display: flex; align-items: center; gap: 34px; }
+      .nav-links a:not(.nav-cta) { color: #535b52; font-size: 13px; font-weight: 600; }
+      .nav-links a:not(.nav-cta):hover { color: #151e18; }
+      .nav-cta, .button {
+        display: inline-flex;
+        min-height: 44px;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 0 18px;
+        border: 0;
+        border-radius: 4px;
+        background: var(--ink);
+        color: white;
+        cursor: pointer;
+        font-size: 13px;
+        font-weight: 700;
+        transition: transform 160ms ease, background 160ms ease;
+      }
+      .nav-cta { min-height: 40px; }
+      .button:hover, .nav-cta:hover { transform: translateY(-2px); background: #2b3c30; }
+      .button-green { background: var(--green); color: var(--ink); }
+      .button-green:hover { background: #a7e65b; }
+      .button svg { width: 16px; height: 16px; }
+
+      .hero {
+        position: relative;
+        display: grid;
+        min-height: 620px;
+        grid-template-columns: 1.08fr .92fr;
+        align-items: center;
+        gap: 38px;
+        padding-block: 74px 80px;
+        overflow: hidden;
+      }
+      .hero::after {
+        position: absolute;
+        z-index: -1;
+        top: 26px;
+        right: -120px;
+        width: 610px;
+        height: 610px;
+        border: 1px solid #e3e3d8;
+        border-radius: 50%;
+        content: "";
+      }
+      .hero-copy { position: relative; z-index: 1; }
+      .eyebrow {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 0 0 24px;
+        color: #626a5e;
+        font: 11px var(--mono);
+        letter-spacing: .09em;
+        text-transform: uppercase;
+      }
+      .live-dot { width: 8px; height: 8px; border-radius: 50%; background: #85bf45; box-shadow: 0 0 0 4px rgb(133 191 69 / 17%); }
+      h1 {
+        max-width: 650px;
+        margin: 0;
+        font: 600 clamp(62px, 8.3vw, 108px)/.91 var(--display);
+        letter-spacing: -.09em;
+      }
+      h1 .accent { color: #668f3d; }
+      .hero-description {
+        max-width: 430px;
+        margin: 25px 0 0;
+        color: #62685f;
+        font-size: 15px;
+        line-height: 1.75;
+      }
+      .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+      .button-outline { border: 1px solid #c9cbbf; background: transparent; color: var(--ink); }
+      .button-outline:hover { background: white; }
+      .hero-facts { display: flex; flex-wrap: wrap; gap: 25px; margin-top: 37px; }
+      .fact { display: grid; gap: 5px; }
+      .fact strong { font: 600 14px var(--display); }
+      .fact span { color: #85897e; font: 10px var(--mono); letter-spacing: .06em; text-transform: uppercase; }
+      .hero-art { position: relative; display: grid; min-height: 420px; place-items: center; }
+      .orbit {
+        position: absolute;
+        width: min(100%, 430px);
+        aspect-ratio: 1;
+        border: 1px solid #dfe1d5;
+        border-radius: 50%;
+      }
+      .orbit::before, .orbit::after {
+        position: absolute;
+        inset: 36px;
+        border: 1px solid #e5e6db;
+        border-radius: 50%;
+        content: "";
+      }
+      .orbit::after { inset: 76px; }
+      .poster {
+        position: relative;
+        display: flex;
+        width: 265px;
+        height: 330px;
+        flex-direction: column;
+        justify-content: space-between;
+        overflow: hidden;
+        padding: 24px;
+        transform: rotate(4deg);
+        background: #c9f49c;
+        box-shadow: 16px 21px 0 #e8e7db, 0 25px 60px rgb(43 54 36 / 16%);
+      }
+      .poster::before {
+        position: absolute;
+        top: 84px;
+        right: -26px;
+        width: 220px;
+        height: 220px;
+        border: 1px solid rgb(23 35 29 / 30%);
+        border-radius: 50%;
+        box-shadow: 0 0 0 20px rgb(23 35 29 / 7%), 0 0 0 42px rgb(23 35 29 / 5%);
+        content: "";
+      }
+      .poster::after {
+        position: absolute;
+        right: 41px;
+        bottom: 84px;
+        width: 94px;
+        height: 94px;
+        border: 1px solid #17231d;
+        border-radius: 50%;
+        background: #17231d;
+        content: "";
+      }
+      .poster-top, .poster-bottom { position: relative; z-index: 1; }
+      .poster-top { display: flex; justify-content: space-between; font: 10px var(--mono); text-transform: uppercase; }
+      .poster-title { position: relative; z-index: 1; margin: auto 0; font: 700 48px/.88 var(--display); letter-spacing: -.08em; }
+      .poster-title span { display: block; }
+      .poster-bottom { display: flex; justify-content: space-between; font: 10px var(--mono); text-transform: uppercase; }
+      .float-note {
+        position: absolute;
+        right: -2px;
+        bottom: 48px;
+        padding: 14px 16px;
+        transform: rotate(-4deg);
+        border: 1px solid #dedfd4;
+        background: #fffefa;
+        box-shadow: 0 10px 24px rgb(23 35 29 / 7%);
+        font: 10px/1.7 var(--mono);
+      }
+      .float-note strong { display: block; font: 600 13px var(--display); }
+      .spark { position: absolute; top: 51px; right: 55px; color: #789c4f; font-size: 29px; }
+
+      .ticker { overflow: hidden; background: var(--ink); color: #f5f4ed; }
+      .ticker-track {
+        display: flex;
+        width: max-content;
+        align-items: center;
+        gap: 28px;
+        padding: 15px 0;
+        animation: marquee 32s linear infinite;
+        font: 10px var(--mono);
+        letter-spacing: .12em;
+        text-transform: uppercase;
+      }
+      .ticker-track span:nth-child(even) { color: var(--green); }
+      @keyframes marquee { to { transform: translateX(-50%); } }
+
+      .section { padding-block: 105px; }
+      .section-header { display: flex; align-items: end; justify-content: space-between; gap: 26px; margin-bottom: 40px; }
+      .section-kicker { margin: 0 0 13px; color: #71805f; font: 10px var(--mono); letter-spacing: .12em; text-transform: uppercase; }
+      h2 { margin: 0; font: 600 clamp(36px, 5vw, 54px)/1 var(--display); letter-spacing: -.065em; }
+      .section-intro { max-width: 340px; margin: 0; color: #73786f; font-size: 13px; line-height: 1.7; }
+      .domains-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 13px; }
+      .domain-card {
+        position: relative;
+        min-height: 225px;
+        padding: 22px;
+        border: 1px solid var(--line);
+        background: #faf9f3;
+        transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+      }
+      .domain-card:hover { transform: translateY(-5px); border-color: #b7c5a6; background: #fff; }
+      .domain-number { color: #8a8e82; font: 10px var(--mono); }
+      .domain-icon { display: block; width: 27px; height: 27px; margin: 23px 0 15px; color: #658944; }
+      .domain-card h3 { margin: 0 0 7px; font: 600 17px var(--display); letter-spacing: -.04em; }
+      .domain-card p { margin: 0; color: #777b71; font-size: 12px; line-height: 1.6; }
+      .domain-arrow { position: absolute; top: 18px; right: 19px; color: #858a7d; font-size: 17px; }
+
+      .prize-section { background: #e8eddf; }
+      .prize-layout { display: grid; grid-template-columns: .85fr 1.15fr; align-items: center; gap: 70px; }
+      .prize-copy h2 { max-width: 360px; }
+      .prize-copy > p:last-child { max-width: 360px; margin: 19px 0 0; color: #6b7366; font-size: 13px; line-height: 1.75; }
+      .prize-total { margin: 26px 0 0; color: #658944; font: 600 clamp(42px, 6vw, 66px)/1 var(--display); letter-spacing: -.08em; }
+      .prize-total small { display: block; margin-top: 7px; color: #777e70; font: 10px var(--mono); letter-spacing: .1em; text-transform: uppercase; }
+      .prize-cards { display: grid; gap: 10px; }
+      .prize-card {
+        display: grid;
+        min-height: 90px;
+        grid-template-columns: 54px 1fr auto;
+        align-items: center;
+        gap: 17px;
+        padding: 17px 22px;
+        border: 1px solid #d4ddc9;
+        background: rgb(255 255 255 / 54%);
+      }
+      .prize-rank { display: grid; width: 43px; height: 43px; place-items: center; border-radius: 50%; background: #d7e7c7; font: 11px var(--mono); }
+      .prize-card:first-child .prize-rank { background: var(--green); }
+      .prize-card h3 { margin: 0 0 5px; font: 600 15px var(--display); }
+      .prize-card p { margin: 0; color: #7a8074; font-size: 11px; }
+      .prize-amount { white-space: nowrap; font: 600 22px var(--display); letter-spacing: -.04em; }
+
+      .details { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
+      .timeline { margin-top: 30px; border-top: 1px solid var(--line); }
+      .timeline-row { display: grid; grid-template-columns: 92px 1fr; gap: 18px; padding: 17px 0; border-bottom: 1px solid var(--line); }
+      .timeline-time { color: #71805f; font: 10px var(--mono); }
+      .timeline-row h3 { margin: 0 0 4px; font: 600 14px var(--display); }
+      .timeline-row p { margin: 0; color: #777b71; font-size: 11px; line-height: 1.5; }
+      .info-card { padding: 27px; background: var(--ink); color: #f5f4ed; }
+      .info-card .section-kicker { color: var(--green); }
+      .info-card h2 { font-size: 34px; }
+      .info-list { display: grid; gap: 0; margin-top: 24px; }
+      .info-item { display: flex; align-items: flex-start; justify-content: space-between; gap: 18px; padding: 14px 0; border-top: 1px solid rgb(255 255 255 / 14%); }
+      .info-item span { color: #b7beb4; font-size: 12px; }
+      .info-item strong { text-align: right; font-size: 12px; }
+      .info-callout { margin: 22px 0 0; padding: 13px; background: rgb(255 255 255 / 7%); color: #d6ddcf; font-size: 11px; line-height: 1.6; }
+
+      .register-section { padding-block: 90px; background: var(--ink); color: #f5f4ed; }
+      .register-layout { display: grid; grid-template-columns: .8fr 1.2fr; gap: 75px; }
+      .register-copy h2 { max-width: 370px; font-size: clamp(40px, 5vw, 58px); }
+      .register-copy > p:last-of-type { max-width: 350px; margin: 18px 0 0; color: #aeb8ac; font-size: 13px; line-height: 1.75; }
+      .register-meta { display: grid; gap: 12px; margin-top: 29px; color: #c5cdc1; font: 10px var(--mono); }
+      .register-meta span { display: flex; align-items: center; gap: 9px; }
+      .register-meta svg { width: 15px; height: 15px; color: var(--green); }
+      .registration-form { padding: 27px; background: #f9f8f2; color: var(--ink); }
+      .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 17px 14px; }
+      .field { display: grid; gap: 7px; }
+      .field-full { grid-column: 1 / -1; }
+      .field label { font-size: 11px; font-weight: 700; }
+      .field input, .field select {
+        width: 100%;
+        min-height: 43px;
+        padding: 0 12px;
+        border: 1px solid #d9dbd0;
+        border-radius: 2px;
+        background: white;
+        color: var(--ink);
+        font-size: 12px;
+      }
+      .field input::placeholder { color: #a0a397; }
+      .form-note { grid-column: 1 / -1; margin: 0; color: #777b71; font-size: 10px; line-height: 1.55; }
+      .submit-button { width: 100%; margin-top: 17px; }
+      .form-status { min-height: 18px; margin: 11px 0 0; color: #a23c34; font-size: 11px; line-height: 1.5; }
+      .form-status[data-state="success"] { color: #42682e; }
+
+      .footer { padding: 23px 0; background: #111a14; color: #aab3a7; }
+      .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; font-size: 10px; }
+      .footer-inner .wordmark-text { color: #f5f4ed; }
+      .footer-note { font-family: var(--mono); }
+      @media (max-width: 850px) {
+        .hero { min-height: 570px; grid-template-columns: 1fr .8fr; gap: 8px; }
+        h1 { font-size: clamp(61px, 9.5vw, 88px); }
+        .hero-art { transform: scale(.85); transform-origin: center; }
+        .domains-grid { grid-template-columns: repeat(2, 1fr); }
+        .prize-layout { gap: 35px; }
+        .register-layout { gap: 35px; }
+      }
+      @media (max-width: 640px) {
+        .shell { width: min(100% - 38px, 520px); }
+        .nav { min-height: 66px; }
+        .nav-links { gap: 14px; }
+        .nav-links a:not(.nav-cta) { display: none; }
+        .nav-cta { min-height: 37px; padding-inline: 13px; font-size: 11px; }
+        .hero { display: block; min-height: auto; padding-block: 68px 54px; }
+        .hero::after { top: 370px; right: -260px; width: 490px; height: 490px; }
+        h1 { font-size: clamp(64px, 16vw, 88px); }
+        .hero-description { max-width: 360px; font-size: 14px; }
+        .hero-art { min-height: 370px; margin-top: 9px; transform: scale(.82); }
+        .poster { width: 240px; height: 300px; }
+        .float-note { right: -15px; }
+        .spark { right: 15px; }
+        .hero-facts { gap: 20px; }
+        .section { padding-block: 73px; }
+        .section-header { display: block; margin-bottom: 28px; }
+        .section-intro { margin-top: 14px; }
+        h2 { font-size: 42px; }
+        .domains-grid { gap: 9px; }
+        .domain-card { min-height: 209px; padding: 16px; }
+        .domain-card h3 { font-size: 15px; }
+        .prize-layout, .details, .register-layout { grid-template-columns: 1fr; gap: 32px; }
+        .prize-total { font-size: 55px; }
+        .prize-card { grid-template-columns: 45px 1fr auto; gap: 10px; padding: 14px; }
+        .prize-rank { width: 38px; height: 38px; }
+        .prize-amount { font-size: 19px; }
+        .details { gap: 37px; }
+        .info-card { padding: 23px; }
+        .register-section { padding-block: 72px; }
+        .registration-form { padding: 20px 16px; }
+        .form-grid { grid-template-columns: 1fr; }
+        .field-full, .form-note { grid-column: auto; }
+        .footer-inner { align-items: flex-start; flex-direction: column; gap: 10px; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <nav class="nav shell" aria-label="Main navigation">
+        <a class="wordmark" href="#home" aria-label="Makeathon home">
+          <span class="mark" aria-hidden="true">M</span>
+          <span class="wordmark-text">MAKEATHON <span>’27</span></span>
+        </a>
+        <div class="nav-links">
+          <a href="#domains">Domains</a>
+          <a href="#prizes">Prizes</a>
+          <a href="#event">The event</a>
+          <a class="nav-cta" href="#register">Register <span aria-hidden="true">↗</span></a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero shell" id="home" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="live-dot" aria-hidden="true"></span> Northfield College · Student hackathon</p>
+          <h1 id="hero-title">Ideas into <span class="accent">impact.</span></h1>
+          <p class="hero-description">
+            24 hours. One campus. A hundred possibilities. Bring your people,
+            pick a problem worth solving, and make something real.
+          </p>
+          <div class="hero-actions">
+            <a class="button button-green" href="#register">Save your spot <span aria-hidden="true">↗</span></a>
+            <a class="button button-outline" href="#domains">Explore the domains</a>
+          </div>
+          <div class="hero-facts" aria-label="Event highlights">
+            <div class="fact"><strong>Jan 16–17, 2027</strong><span>Saturday to Sunday</span></div>
+            <div class="fact"><strong>24 hours</strong><span>Build together</span></div>
+            <div class="fact"><strong>₹1,00,000</strong><span>Total prize pool</span></div>
+          </div>
+        </div>
+        <div class="hero-art" aria-label="Makeathon event poster">
+          <div class="orbit" aria-hidden="true"></div>
+          <span class="spark" aria-hidden="true">✳</span>
+          <div class="poster">
+            <div class="poster-top"><span>Northfield College</span><span>001—027</span></div>
+            <div class="poster-title"><span>MAKE</span><span>IT</span><span>MATTER.</span></div>
+            <div class="poster-bottom"><span>Jan 16—17</span><span>24H / Campus</span></div>
+          </div>
+          <div class="float-note"><strong>One weekend.</strong>Infinite ways forward.</div>
+        </div>
+      </section>
+
+      <div class="ticker" aria-label="Build, learn, collaborate, repeat">
+        <div class="ticker-track" aria-hidden="true">
+          <span>Build something real</span><span>✳</span><span>Learn by doing</span><span>✳</span><span>Meet your people</span><span>✳</span><span>Make it matter</span><span>✳</span><span>Build something real</span><span>✳</span><span>Learn by doing</span><span>✳</span><span>Meet your people</span><span>✳</span><span>Make it matter</span><span>✳</span>
+        </div>
+      </div>
+
+      <section class="section shell" id="domains" aria-labelledby="domains-title">
+        <div class="section-header">
+          <div><p class="section-kicker">01 / Pick a problem</p><h2 id="domains-title">Build for a better<br />everyday.</h2></div>
+          <p class="section-intro">Choose a track that sparks something. You can build a product, prototype, or proof of concept — the best ideas start anywhere.</p>
+        </div>
+        <div class="domains-grid">
+          <article class="domain-card">
+            <span class="domain-number">TRACK 01</span><span class="domain-arrow" aria-hidden="true">↗</span>
+            <svg class="domain-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v3m0 12v3M3 12h3m12 0h3M5.64 5.64l2.12 2.12m8.48 8.48 2.12 2.12m0-12.72-2.12 2.12m-8.48 8.48-2.12 2.12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.5"/></svg>
+            <h3>AI &amp; Automation</h3><p>Make everyday work smarter, more useful, and more human.</p>
+          </article>
+          <article class="domain-card">
+            <span class="domain-number">TRACK 02</span><span class="domain-arrow" aria-hidden="true">↗</span>
+            <svg class="domain-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21s8-4 8-11V5l-8-3-8 3v5c0 7 8 11 8 11Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="m9 12 2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <h3>Health &amp; Wellbeing</h3><p>Rethink how we care for ourselves and each other.</p>
+          </article>
+          <article class="domain-card">
+            <span class="domain-number">TRACK 03</span><span class="domain-arrow" aria-hidden="true">↗</span>
+            <svg class="domain-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 22V12m0 2c-5.3 0-8-2.7-8-8 5.3 0 8 2.7 8 8Zm0-4c0-5.3 2.7-8 8-8 0 5.3-2.7 8-8 8Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <h3>Climate &amp; Sustainability</h3><p>Design practical ideas for a lighter footprint.</p>
+          </article>
+          <article class="domain-card">
+            <span class="domain-number">TRACK 04</span><span class="domain-arrow" aria-hidden="true">↗</span>
+            <svg class="domain-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M8 21h8m-4-4v4m-5-9 3-3 2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <h3>Campus &amp; Community</h3><p>Improve the little things that make campus feel like home.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section prize-section" id="prizes" aria-labelledby="prizes-title">
+        <div class="prize-layout shell">
+          <div class="prize-copy">
+            <p class="section-kicker">02 / Good ideas get noticed</p>
+            <h2 id="prizes-title">Big ideas.<br />Bigger energy.</h2>
+            <div class="prize-total">₹1,00,000<small>Total prize pool · INR</small></div>
+            <p>Every finalist gets a chance to share their work with campus mentors and judges. Winning teams take home prize money and bragging rights.</p>
+          </div>
+          <div class="prize-cards" aria-label="Prize breakdown">
+            <article class="prize-card"><span class="prize-rank">01</span><div><h3>First place</h3><p>For the idea with the biggest impact</p></div><strong class="prize-amount">₹50,000</strong></article>
+            <article class="prize-card"><span class="prize-rank">02</span><div><h3>Second place</h3><p>For a thoughtful build with real potential</p></div><strong class="prize-amount">₹30,000</strong></article>
+            <article class="prize-card"><span class="prize-rank">03</span><div><h3>Third place</h3><p>For a fresh take on a meaningful challenge</p></div><strong class="prize-amount">₹20,000</strong></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section shell" id="event" aria-labelledby="event-title">
+        <div class="section-header">
+          <div><p class="section-kicker">03 / Your weekend, mapped out</p><h2 id="event-title">Show up curious.<br />Leave with more.</h2></div>
+          <p class="section-intro">A full day of focused building, good food, helpful mentors, and a final showcase. Come ready to learn something new.</p>
+        </div>
+        <div class="details">
+          <div>
+            <div class="timeline" aria-label="Event schedule">
+              <div class="timeline-row"><span class="timeline-time">DAY 01 · 9:00</span><div><h3>Check-in &amp; kickoff</h3><p>Find your team, meet the mentors, and hear the challenge.</p></div></div>
+              <div class="timeline-row"><span class="timeline-time">DAY 01 · 11:00</span><div><h3>Build time begins</h3><p>Get hands-on. Mentors and snacks are here when you need them.</p></div></div>
+              <div class="timeline-row"><span class="timeline-time">DAY 02 · 9:00</span><div><h3>Final touches</h3><p>Polish your idea and get your demo ready for the room.</p></div></div>
+              <div class="timeline-row"><span class="timeline-time">DAY 02 · 13:00</span><div><h3>Demo &amp; awards</h3><p>Show us what you made. Celebrate every team's work.</p></div></div>
+            </div>
+          </div>
+          <aside class="info-card">
+            <p class="section-kicker">The essentials</p><h2>All you need<br />to know.</h2>
+            <div class="info-list">
+              <div class="info-item"><span>When</span><strong>Jan 16–17, 2027</strong></div>
+              <div class="info-item"><span>Where</span><strong>Northfield College campus</strong></div>
+              <div class="info-item"><span>Who</span><strong>Current students</strong></div>
+              <div class="info-item"><span>Team size</span><strong>2–4 students</strong></div>
+              <div class="info-item"><span>What to bring</span><strong>Laptop &amp; student ID</strong></div>
+            </div>
+            <p class="info-callout">New to hackathons? You're absolutely welcome. You don't need a finished idea or a perfect team to get started.</p>
+          </aside>
+        </div>
+      </section>
+
+      <section class="register-section" id="register" aria-labelledby="register-title">
+        <div class="register-layout shell">
+          <div class="register-copy">
+            <p class="section-kicker">04 / Your next idea starts here</p>
+            <h2 id="register-title">Make room for what’s next.</h2>
+            <p>Register your interest for Makeathon ’27. Sign up as a team lead and add your teammates to get your crew on the list.</p>
+            <div class="register-meta">
+              <span><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Open to all current Northfield students</span>
+              <span><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Teams of 2–4 students</span>
+              <span><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>No entry fee</span>
+            </div>
+          </div>
+          <form class="registration-form" id="registration-form">
+            <div class="form-grid">
+              <div class="field"><label for="team-name">Team name</label><input id="team-name" name="team-name" placeholder="Give your team a name" required maxlength="60" /></div>
+              <div class="field"><label for="team-size">Team size</label><select id="team-size" name="team-size" required><option value="" disabled selected>Select size</option><option value="2">2 students</option><option value="3">3 students</option><option value="4">4 students</option></select></div>
+              <div class="field"><label for="lead-name">Team lead name</label><input id="lead-name" name="lead-name" autocomplete="name" placeholder="Your full name" required maxlength="100" /></div>
+              <div class="field"><label for="student-email">College email</label><input id="student-email" name="student-email" type="email" autocomplete="email" placeholder="you@northfield.edu" required maxlength="254" /></div>
+              <div class="field field-full"><label for="domain-choice">Preferred domain</label><select id="domain-choice" name="domain-choice" required><option value="" disabled selected>Choose a domain</option><option>AI &amp; Automation</option><option>Health &amp; Wellbeing</option><option>Climate &amp; Sustainability</option><option>Campus &amp; Community</option><option>Surprise me</option></select></div>
+              <p class="form-note">Registration is for current Northfield College students. This preview form does not send or store your information.</p>
+            </div>
+            <button class="button button-green submit-button" type="submit">Register your team <span aria-hidden="true">↗</span></button>
+            <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner shell">
+        <a class="wordmark" href="#home"><span class="mark" aria-hidden="true">M</span><span class="wordmark-text">MAKEATHON <span>’27</span></span></a>
+        <span class="footer-note">Made on campus. Built for what’s next.</span>
+        <span>Northfield College · January 2027</span>
+      </div>
+    </footer>
+    <script>
+      const registrationForm = document.querySelector("#registration-form");
+      const formStatus = document.querySelector("#form-status");
+
+      registrationForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        if (!registrationForm.reportValidity()) return;
+
+        const teamName = registrationForm.elements.namedItem("team-name").value.trim();
+        formStatus.dataset.state = "success";
+        formStatus.textContent = `Thanks, ${teamName}! Your team details are ready. This preview does not submit or store registrations; connect a registration service to receive them.`;
+        registrationForm.reset();
+      });
+    </script>
+  </body>
+</html>
